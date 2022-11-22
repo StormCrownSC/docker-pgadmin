@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres 
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /postgres
+    volumes:
+       - ./postgres:/data/postgres
+    ports:
+      - "5432:5432"
+ 
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - ./pgadmin:/var/lib/pgadmin
+    ports:
+      - "10000:80"
+
